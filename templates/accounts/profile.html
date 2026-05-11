@@ -157,6 +157,44 @@
                         </div>
                     {% endif %}
                 </section>
+
+                <section class="profile-card-wide">
+    <div class="profile-card-head">
+        <div>
+            <span class="shop-label">Обране</span>
+            <h2>Мої вподобання</h2>
+        </div>
+    </div>
+
+    {% if favorites %}
+        <div class="profile-orders">
+            {% for product in favorites %}
+                <article class="profile-order">
+                    <div class="profile-order-top">
+                        <div>
+                            <h3>
+                                <a href="{% url 'product_view' product.slug %}">
+                                    {{ product.title }}
+                                </a>
+                            </h3>
+                            <span>Додано в обране</span>
+                        </div>
+
+                        <strong>
+                            ❤️
+                        </strong>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="profile-empty">
+            <h3>Немає обраних товарів</h3>
+            <p>Додавай курси в обране, щоб швидко повертатись до них.</p>
+            <a href="{% url 'shop' %}" class="primary-action">Перейти до курсів</a>
+        </div>
+    {% endif %}
+</section>
             </div>
         </div>
     </section>

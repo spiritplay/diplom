@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from .forms import ProfileForm
 from .models import Profile
 from order.models import Order
+from shop.models import Product
 
 
 def register_view(request):
@@ -45,6 +46,7 @@ def logout_view(request):
 def profile_view(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    favorites = Product.objects.filter(likes=request.user)
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile, user=request.user)
@@ -58,4 +60,5 @@ def profile_view(request):
     return render(request, 'accounts/profile.html', {
         'form': form,
         'orders': orders,
+        'favorites': favorites
     })
