@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Кошик | SkillMarket Courses</title>
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/navbar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/cart.css' %}?v=1">
+</head>
+<body>
+
+{% include 'includes/shop_navbar.html' %}
+
+<main class="cart-page">
+    <section class="cart-hero">
+        <span class="shop-label">Ваш кошик</span>
+        <h1>Обрані курси</h1>
+        <p>Перевірте список курсів перед оформленням замовлення.</p>
+    </section>
+
+    <section class="cart-section">
+        {% if cart|length > 0 %}
+            <div class="cart-layout">
+                <div class="cart-items">
+                    {% for item in cart %}
+                        <article class="cart-item">
+                            {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}">
+                            {% else %}
+                                <div class="cart-placeholder">
+                                    <span>{{ item.product.title|first }}</span>
+                                </div>
+                            {% endif %}
+
+                            <div class="cart-info">
+                                <span class="course-category">{{ item.product.category.title }}</span>
+                                <h3>{{ item.product.title }}</h3>
+                                <p>{{ item.product.about|truncatewords:22 }}</p>
+
+                                <div class="cart-meta">
+                                    <span>Кількість: {{ item.quantity }}</span>
+                                    <strong>{{ item.price }} грн</strong>
+                                </div>
+                            </div>
+
+                            <a href="{% url 'cart:cart_remove' item.product.id %}" class="cart-remove">
+                                Видалити
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                <aside class="cart-summary-box">
+                    <h2>Підсумок</h2>
+
+                    <div class="summary-row">
+                        <span>Курсів у кошику</span>
+                        <strong>{{ cart|length }}</strong>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>До сплати</span>
+                        <strong>{{ cart.get_total_price }} грн</strong>
+                    </div>
+
+                    <a href="{% url 'create' %}" class="primary-action">
+                        Оформити замовлення
+                    </a>
+
+                    <a href="{% url 'shop' %}" class="secondary-action">
+                        Продовжити вибір
+                    </a>
+                </aside>
+            </div>
+        {% else %}
+            <div class="cart-empty-state">
+                <h2>Кошик порожній</h2>
+                <p>Ви ще не додали жодного курсу. Перейдіть до каталогу та оберіть навчання.</p>
+                <a href="{% url 'shop' %}" class="primary-action">Перейти до курсів</a>
+            </div>
+        {% endif %}
+    </section>
+</main>
+
+</body>
+</html>

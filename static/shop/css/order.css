@@ -1,0 +1,148 @@
+.order-page {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.order-hero {
+    padding: 64px 60px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.order-hero h1 {
+    margin: 10px 0 14px;
+    font-size: 44px;
+    color: #0f172a;
+}
+
+.order-hero p {
+    margin: 0;
+    color: #64748b;
+    font-size: 18px;
+}
+
+.order-section {
+    padding: 60px;
+}
+
+.order-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 28px;
+    align-items: start;
+}
+
+.order-form-card,
+.order-summary-card,
+.order-success {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+}
+
+.order-form-card h2,
+.order-summary-card h2 {
+    margin: 0 0 24px;
+    color: #0f172a;
+}
+
+.order-items {
+    display: grid;
+    gap: 16px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.order-item h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    color: #0f172a;
+}
+
+.order-item span {
+    color: #64748b;
+}
+
+.order-item strong {
+    color: #0f172a;
+    text-align: right;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 24px 0;
+    padding-top: 20px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.order-total span {
+    color: #64748b;
+    font-weight: 700;
+}
+
+.order-total strong {
+    color: #0f172a;
+    font-size: 26px;
+}
+
+.order-summary-card .secondary-action {
+    width: 100%;
+}
+
+.order-empty {
+    margin: 0;
+    color: #64748b;
+}
+
+.order-success {
+    max-width: 680px;
+    margin: 80px auto;
+    text-align: center;
+}
+
+.order-success h1 {
+    margin: 10px 0 14px;
+    font-size: 42px;
+    color: #0f172a;
+}
+
+.order-success p {
+    margin: 0 0 12px;
+    color: #64748b;
+    font-size: 18px;
+}
+
+.order-success > strong {
+    display: block;
+    margin-bottom: 28px;
+    color: #2563eb;
+    font-size: 34px;
+}
+
+@media (max-width: 900px) {
+    .order-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .order-hero,
+    .order-section {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .order-hero h1,
+    .order-success h1 {
+        font-size: 34px;
+    }
+}

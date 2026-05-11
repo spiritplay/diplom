@@ -1,0 +1,16 @@
+<header class="header">
+    <div class="logo">SkillMarket</div>
+
+    <nav class="nav">
+        <a href="{% url 'index' %}">Головна</a>
+        <a href="#about">Про платформу</a>
+        <a href="{% url 'shop' %}">Навчання</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'accounts:logout' %}">Вийти</a>
+        {% else %}
+            <a href="{% url 'accounts:login' %}">Увійти</a>
+            <a href="{% url 'accounts:register' %}">Реєстрація</a>
+        {% endif %}
+
+    </nav>
+</header>

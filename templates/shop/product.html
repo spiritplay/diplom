@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.title }} | SkillMarket Courses</title>
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/navbar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/product.css' %}?v=1">
+</head>
+<body>
+
+{% include 'includes/shop_navbar.html' %}
+
+<main class="product-page">
+    <section class="product-hero">
+        <div class="product-media">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.title }}">
+            {% else %}
+                <div class="product-placeholder">
+                    <span>{{ product.title|first }}</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="product-summary">
+            <a href="{% url 'category_view' product.category.slug %}" class="back-link">
+                Назад до курсів
+            </a>
+
+            <span class="shop-label">{{ product.category.title }}</span>
+            <h1>{{ product.title }}</h1>
+            <p>{{ product.about }}</p>
+
+            <div class="product-panel">
+                <div>
+                    <span>Вартість курсу</span>
+                    <strong>{{ product.price }} грн</strong>
+                </div>
+
+                <div>
+                    <span>Формат</span>
+                    <strong>Онлайн</strong>
+                </div>
+            </div>
+
+            <div class="product-actions">
+                <a href="{% url 'cart:cart_add' product.id %}" class="primary-action">Записатися на курс</a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'toggle_like' product.slug %}" class="secondary-action">
+                        {% if user in product.likes.all %}
+                            Прибрати з обраного
+                        {% else %}
+                            Додати в обране
+                        {% endif %}
+                    </a>
+                {% else %}
+                    <span class="login-note">Увійдіть, щоб додати курс в обране.</span>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="product-details">
+        <div class="details-main">
+            <span class="shop-label">Про курс</span>
+            <h2>Що ви отримаєте після навчання</h2>
+            <p>
+                Цей курс допоможе послідовно розібратися з темою, закріпити знання
+                на практиці та краще зрозуміти, як застосовувати навички в реальних задачах.
+            </p>
+
+            <div class="details-grid">
+                <div>
+                    <h3>Практичні завдання</h3>
+                    <p>Матеріали курсу орієнтовані на поступове закріплення знань через вправи та невеликі проєкти.</p>
+                </div>
+
+                <div>
+                    <h3>Зрозуміла структура</h3>
+                    <p>Навчання побудоване так, щоб рухатися від базових понять до складніших тем без зайвого хаосу.</p>
+                </div>
+
+                <div>
+                    <h3>Корисні навички</h3>
+                    <p>Курс допоможе сформувати основу для подальшого розвитку в обраному напрямі.</p>
+                </div>
+            </div>
+        </div>
+
+        <aside class="details-sidebar">
+            <h3>Інформація</h3>
+            <ul>
+                <li><span>Категорія</span><strong>{{ product.category.title }}</strong></li>
+                <li><span>Формат</span><strong>Онлайн</strong></li>
+                <li><span>Доступ</span><strong>Після запису</strong></li>
+                <li><span>Ціна</span><strong>{{ product.price }} грн</strong></li>
+            </ul>
+        </aside>
+    </section>
+</main>
+
+<script src="{% static 'shop/js/script.js' %}?v=4"></script>
+</body>
+</html>

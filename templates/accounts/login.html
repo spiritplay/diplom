@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Вхід | SkillMarket Courses</title>
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/navbar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/auth.css' %}?v=1">
+</head>
+<body>
+
+{% include 'includes/shop_navbar.html' %}
+
+<main class="auth-page">
+    <section class="auth-card">
+        <span class="shop-label">Авторизація</span>
+        <h1>Увійдіть в акаунт</h1>
+        <p>Після входу ви зможете швидше оформлювати замовлення та зберігати обрані курси.</p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="auth-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Ім’я користувача</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Пароль</label>
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+
+            <button type="submit" class="primary-action">Увійти</button>
+        </form>
+
+        <div class="auth-footer">
+            <span>Ще немає акаунта?</span>
+            <a href="{% url 'accounts:register' %}">Зареєструватися</a>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

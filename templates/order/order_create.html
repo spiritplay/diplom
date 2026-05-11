@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформлення замовлення | SkillMarket Courses</title>
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/navbar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/order.css' %}?v=1">
+</head>
+<body>
+
+{% include 'includes/shop_navbar.html' %}
+
+<main class="order-page">
+    {% if order %}
+        <section class="order-success">
+            <span class="shop-label">Замовлення створено</span>
+            <h1>Дякуємо за замовлення</h1>
+            <p>Ваше замовлення успішно оформлено. Номер замовлення:</p>
+            <strong>#{{ order.id }}</strong>
+
+            <a href="{% url 'shop' %}" class="primary-action">
+                Повернутися до курсів
+            </a>
+        </section>
+    {% else %}
+        <section class="order-hero">
+            <span class="shop-label">Оформлення</span>
+            <h1>Завершення замовлення</h1>
+            <p>Заповніть контактні дані, щоб оформити покупку обраних курсів.</p>
+        </section>
+
+        <section class="order-section">
+            <div class="order-layout">
+                <div class="order-form-card">
+                    <h2>Ваші дані</h2>
+
+                    <form method="post" class="order-form">
+                        {% csrf_token %}
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="{{ form.first_name.id_for_label }}">Ім’я</label>
+                                {{ form.first_name }}
+                                {{ form.first_name.errors }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.last_name.id_for_label }}">Прізвище</label>
+                                {{ form.last_name }}
+                                {{ form.last_name.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">Email</label>
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.phone_number.id_for_label }}">Телефон</label>
+                            {{ form.phone_number }}
+                            {{ form.phone_number.errors }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.city.id_for_label }}">Місто</label>
+                            {{ form.city }}
+                            {{ form.city.errors }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.address.id_for_label }}">Адреса</label>
+                            {{ form.address }}
+                            {{ form.address.errors }}
+                        </div>
+
+                        <button type="submit" class="primary-action">
+                            Підтвердити замовлення
+                        </button>
+                    </form>
+                </div>
+
+                <aside class="order-summary-card">
+                    <h2>Ваш кошик</h2>
+
+                    <div class="order-items">
+                        {% for item in cart %}
+                            <div class="order-item">
+                                <div>
+                                    <h3>{{ item.product.title }}</h3>
+                                    <span>{{ item.quantity }} x {{ item.price }} грн</span>
+                                </div>
+
+                                <strong>{{ item.total_price }} грн</strong>
+                            </div>
+                        {% empty %}
+                            <p class="order-empty">Кошик порожній.</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="order-total">
+                        <span>Разом</span>
+                        <strong>{{ cart.get_total_price }} грн</strong>
+                    </div>
+
+                    <a href="{% url 'cart:cart_detail' %}" class="secondary-action">
+                        Повернутися до кошика
+                    </a>
+                </aside>
+            </div>
+        </section>
+    {% endif %}
+</main>
+
+</body>
+</html>

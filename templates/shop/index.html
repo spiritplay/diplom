@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.title }} | SkillMarket Courses</title>
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/navbar.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'shop/css/courses.css' %}?v=1">
+</head>
+<body>
+
+{% include 'includes/shop_navbar.html' %}
+
+<main class="courses-page">
+    <section class="courses-hero">
+        <div class="courses-hero-content">
+            <a href="{% url 'shop' %}" class="back-link">Назад до категорій</a>
+            <span class="shop-label">Категорія курсів</span>
+            <h1>{{ category.title }}</h1>
+
+            {% if category.description %}
+                <p>{{ category.description }}</p>
+            {% else %}
+                <p>Перегляньте курси цього напряму та оберіть навчання, яке відповідає вашим цілям.</p>
+            {% endif %}
+        </div>
+
+        {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.title }}" class="courses-hero-image">
+        {% endif %}
+    </section>
+
+    <section class="courses-section">
+        <div class="section-title">
+            <span class="shop-label">Доступні курси</span>
+            <h2>Курси напряму {{ category.title }}</h2>
+        </div>
+
+        <div class="course-list">
+            {% for product in products %}
+                <article class="course-item">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.title }}" class="course-image">
+                    {% else %}
+                        <div class="course-placeholder">
+                            <span>{{ product.title|first }}</span>
+                        </div>
+                    {% endif %}
+
+                    <div class="course-info">
+                        <div>
+                            <span class="course-category">{{ category.title }}</span>
+                            <h3>{{ product.title }}</h3>
+                            <p>{{ product.about }}</p>
+                        </div>
+
+                        <div class="course-bottom">
+                            <strong>{{ product.price }} грн</strong>
+                            <a href="{% url 'product_view' product.slug %}" class="category-link">
+                                Детальніше
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="empty-state">
+                    <h3>Курсів у цій категорії поки немає</h3>
+                    <p>Додайте перший курс через адмін-панель Django.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<script src="{% static 'shop/js/script.js' %}?v=2"></script>
+</body>
+</html>

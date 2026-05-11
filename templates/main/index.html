@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillMarket</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}?v=2">
+</head>
+<body>
+
+{% include 'includes/navbar.html' %}
+
+<section class="hero">
+    <h1>Освітня платформа для розвитку сучасних навичок</h1>
+    <p>
+        SkillMarket допомагає знайти корисні онлайн-курси з програмування,
+        дизайну, маркетингу та цифрових професій.
+    </p>
+    <a href="#about" class="btn">Дізнатися більше</a>
+</section>
+
+<section class="intro" id="about">
+    <div class="intro-content">
+        <span class="section-label">Про платформу</span>
+        <h2>Місце, де легше зорієнтуватися у світі онлайн-навчання</h2>
+        <p>
+            SkillMarket створений як інформаційна платформа для пошуку освітніх
+            можливостей. Тут користувач може переглядати напрями навчання,
+            знайомитися з описом курсів і обирати те, що відповідає його цілям.
+        </p>
+    </div>
+
+    <div class="intro-stats">
+        <div>
+            <strong>4+</strong>
+            <span>освітні напрями</span>
+        </div>
+        <div>
+            <strong>24/7</strong>
+            <span>доступ до інформації</span>
+        </div>
+        <div>
+            <strong>100%</strong>
+            <span>онлайн-формат</span>
+        </div>
+    </div>
+</section>
+
+<section class="directions">
+    <div class="section-head">
+        <span class="section-label">Напрями</span>
+        <h2>Що можна буде знайти на платформі</h2>
+    </div>
+
+    <div class="direction-list">
+        <div class="direction-item">
+            <span>01</span>
+            <div>
+                <h3>Програмування</h3>
+                <p>Курси з веброзробки, Python, JavaScript, баз даних та створення сучасних цифрових продуктів.</p>
+            </div>
+        </div>
+
+        <div class="direction-item">
+            <span>02</span>
+            <div>
+                <h3>Дизайн</h3>
+                <p>Матеріали про UX/UI, роботу з макетами, візуальну структуру та створення зручних інтерфейсів.</p>
+            </div>
+        </div>
+
+        <div class="direction-item">
+            <span>03</span>
+            <div>
+                <h3>Маркетинг</h3>
+                <p>Інформація про просування, рекламу, контент, аналітику та комунікацію з аудиторією.</p>
+            </div>
+        </div>
+
+        <div class="direction-item">
+            <span>04</span>
+            <div>
+                <h3>Бізнес та аналітика</h3>
+                <p>Навчальні напрями для розвитку управлінських навичок, роботи з даними та планування проєктів.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="steps">
+    <div class="section-head">
+        <span class="section-label">Як це працює</span>
+        <h2>Простий шлях до вибору навчання</h2>
+    </div>
+
+    <div class="steps-row">
+        <div class="step">
+            <span>1</span>
+            <h3>Перегляд напрямів</h3>
+            <p>Користувач знайомиться з основними сферами навчання.</p>
+        </div>
+
+        <div class="step">
+            <span>2</span>
+            <h3>Опис курсів</h3>
+            <p>У каталозі буде доступна детальна інформація про кожен курс.</p>
+        </div>
+
+        <div class="step">
+            <span>3</span>
+            <h3>Окремий розділ покупки</h3>
+            <p>Функції замовлення та покупки будуть реалізовані в іншому app.</p>
+        </div>
+    </div>
+</section>
+
